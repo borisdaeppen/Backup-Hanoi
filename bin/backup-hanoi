@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use feature 'say';
+                                                               
+use Backup::Hanoi;  
+
+my $help = <<'END_MESSAGE';
+
+  backup-hanoi tells you where to write your next backup
+
+  You need to list your devices in a text file, separated by newline
+
+  example usages:
+
+    # list repeatable pattern
+    backup-hanoi device-list.txt
+
+    # list wich device should be used for backup number 40
+    backup-hanoi device-list.txt 40
+
+    # create a device-list for the backups 40 up to 60
+    backup-hanoi device-list.txt 40 60
+END_MESSAGE
+unless (@ARGV) {
+    say $help;
+    exit 0;
+}
+
+
+my $devices_file = shift @ARGV;
+my $cycle        = shift @ARGV;
+my $cycle_top    = shift @ARGV;
+
+open my $file_handle, '<', $devices_file;
+chomp(my @devices = <$file_handle>);
+close $file_handle;
+
+my $backup = Backup::Hanoi->new(\@devices);
+
+if ($cycle_top) {
+
+	for ($cycle .. $cycle_top) {
+		say $backup->get_device_for_cycle($_);
+	}
+}
+elsif ($cycle) {
+	say $backup->get_device_for_cycle($cycle);
+}
+else {
+	for (0 .. ((2**(scalar @devices))/2)-1)  {
+		say $backup->get_device_for_cycle($_);
+	}
+}
+
