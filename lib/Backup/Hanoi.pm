@@ -26,13 +26,15 @@ sub get_device_for_cycle {
     my $cycle = shift;
 
     my $devices_count = scalar @{$self->{devices}};
-    my $hanoi_cycles = (2**$devices_count) -1;
+    my $hanoi_cycles_half = (2**$devices_count) / 2;
 
-    my $device_mapped_cycle = $cycle % $hanoi_cycles;
+    my $modulo_cycle = $cycle % $hanoi_cycles_half;
+
+    $modulo_cycle = $hanoi_cycles_half if ($modulo_cycle == 0);
 
     my $hanoi_number = 
         _get_right_zeros_from_digital_representation(
-                $device_mapped_cycle);
+                $modulo_cycle);
 
     return $self->{devices}->[$hanoi_number];
 
