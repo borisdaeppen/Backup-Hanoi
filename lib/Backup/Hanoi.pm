@@ -97,7 +97,7 @@ See also the script L<backup-hanoi>.
 
 =head1 FUNCTIONS
 
-=head2 get_device_for_cycle
+=head2 new
 
 Takes a reference to a list with at least three items.
 
