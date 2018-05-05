@@ -7,6 +7,9 @@ sub new {
     my $class   = shift;
     my $devices = shift // [];
 
+    # NOTE: it seems like devices must
+    # contain a minimum of 3 elements
+
     my $self = {}; 
 
     $self->{devices} = $devices;
