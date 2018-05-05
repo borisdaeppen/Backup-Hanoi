@@ -1,6 +1,11 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 use strict;
 use warnings;
+# Autor: Boris Däppen, 2018
+# No guarantee given, use at own risk and will
+
+# PODNAME: backup-hanoi
+# ABSTRACT: predict on which device to put next backup
 
 use feature 'say';
                                                                
@@ -53,4 +58,26 @@ else {
 		say $backup->get_device_for_cycle($_);
 	}
 }
+
+__END__
+
+=encoding utf8
+
+=head1 SYNOPSIS
+
+This is an early release.
+This code is currently not used in production by the author.
+Use it with care!
+
+L<backup-hanoi> tells you where to write your next backup.
+You need to list your devices in a text file, separated by newline.
+
+ # list repeatable pattern
+ backup-hanoi device-list.txt
+
+ # list wich device should be used for backup number 40
+ backup-hanoi device-list.txt 40
+
+ # create a device-list for the backups 40 up to 60
+ backup-hanoi device-list.txt 40 60
 
