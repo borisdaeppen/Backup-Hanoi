@@ -7,12 +7,18 @@ sub new {
     my $class   = shift;
     my $devices = shift // [];
 
-    # NOTE: it seems like devices must
-    # contain a minimum of 3 elements
+    die "You need at least three devices, for this to work.\n"
+        if ($devices < 3);
 
-    my $self = {}; 
+    # the number of devices predicts the size of the cycles
+    my $device_count = scalar @{$devices};
 
-    $self->{devices} = $devices;
+    # half a hanoi cycle is just what we need for backup
+    my $hanoi_cycles_half = (2**$device_count) / 2;
+
+    my $self = {    devices           => $devices,
+                    hanoi_cycles_half => $hanoi_cycles_half,
+               };
 
     bless $self, $class;
 
@@ -24,17 +30,12 @@ sub get_device_for_cycle {
     my $self  = shift;
     my $cycle = shift // 0;
 
-    # the number of devices predicts the size of the cycles
-    my $devices_count = scalar @{$self->{devices}};
-
-    # half a hanoi cycle is just what we need for backup
-    my $hanoi_cycles_half = (2**$devices_count) / 2;
-
-    # allow cycles to cross the limit, map them to first half
-    my $modulo_cycle = $cycle % $hanoi_cycles_half;
+    # allow cycle to cross hanoi limit, map it to first half
+    my $modulo_cycle = $cycle % $self->{hanoi_cycles_half};
 
     # change zero to maximum, so that zero gets highest device
-    $modulo_cycle = $hanoi_cycles_half if ($modulo_cycle == 0);
+    $modulo_cycle = $self->{hanoi_cycles_half}
+        if ($modulo_cycle == 0);
 
     # calculate which device is used for given cycle
     my $hanoi_number = 
