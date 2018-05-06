@@ -103,4 +103,4 @@ Takes a reference to a list with at least three items.
 
 =head2 get_device_for_cycle
 
-Give a positive integer greather than zero, receive a string which reprecents the selcted item.
+Give a positive integer greather than zero, receive a string which represents the selected item.
