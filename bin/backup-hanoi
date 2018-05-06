@@ -75,7 +75,7 @@ You need to list your devices in a text file, separated by newline.
  # list repeatable pattern
  backup-hanoi device-list.txt
 
- # list wich device should be used for backup number 40
+ # list which device should be used for backup number 40
  backup-hanoi device-list.txt 40
 
  # create a device-list for the backups 40 up to 60
