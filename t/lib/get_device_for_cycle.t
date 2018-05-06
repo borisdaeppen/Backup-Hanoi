@@ -1,4 +1,4 @@
-use Test::More tests => 88;
+use Test::More tests => 91;
 
 use Backup::Hanoi;
 
@@ -15,6 +15,9 @@ my $three_devices =   [
 
 my $backup3 = Backup::Hanoi->new($three_devices);
 
+is $backup3->get_device_for_cycle(-3), 'C', 'three devices cycle -3';
+is $backup3->get_device_for_cycle(-2), 'A', 'three devices cycle -2';
+is $backup3->get_device_for_cycle(-1), 'B', 'three devices cycle -1';
 is $backup3->get_device_for_cycle( 0), 'C', 'three devices cycle  0';
 
 is $backup3->get_device_for_cycle( 1), 'A', 'three devices cycle  1';

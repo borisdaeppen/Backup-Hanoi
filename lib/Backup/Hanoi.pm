@@ -31,6 +31,12 @@ sub get_device_for_cycle {
     my $self  = shift;
     my $cycle = shift // 0;
 
+    # treat negative numbers as normal FIFO
+    # e.g. index -1 gives the second last element
+    return $self->{devices}
+        ->[(scalar @{$self->{devices}}) + $cycle -1]
+            if ($cycle < 0);
+
     # allow cycle to cross hanoi limit, map it to first half
     my $modulo_cycle = $cycle % $self->{hanoi_cycles_half};
 
@@ -92,6 +98,13 @@ Use it with care!
      print $backup->get_device_for_cycle($_);
      print "\n";
  }
+ 
+ # enhanced compination of FIFO for initialisation
+ # and Hanoi algorithm for overwriting
+ for (-3 .. 99) {
+     print $backup->get_device_for_cycle($_);
+     print "\n";
+ }
 
 See also the script L<backup-hanoi>.
 
@@ -103,4 +116,11 @@ Takes a reference to a list with at least three items.
 
 =head2 get_device_for_cycle
 
-Give a positive integer equal to or greather than zero, receive a string which represents the selected item.
+Give any integer, receive a string which represents the selected item.
+
+Negative numbers up to zero select devices according to FIFO.
+Where 0 gives back the last element and (elements -1) the first.
+This can be used to initialise each empty device.
+
+Positive numbers select according to the algorithm «Tower of Hanoi».
+This can be used to efficiently choose which device to overwrite.

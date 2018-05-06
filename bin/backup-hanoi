@@ -44,13 +44,13 @@ close $file_handle;
 
 my $backup = Backup::Hanoi->new(\@devices);
 
-if ($cycle_top) {
+if (defined $cycle_top and ($cycle_top or $cycle_top == 0)) {
 
 	for ($cycle .. $cycle_top) {
 		say $backup->get_device_for_cycle($_);
 	}
 }
-elsif ($cycle) {
+elsif (defined $cycle and ($cycle or $cycle == 0)) {
 	say $backup->get_device_for_cycle($cycle);
 }
 else {
@@ -80,4 +80,9 @@ You need to list your devices in a text file, separated by newline.
 
  # create a device-list for the backups 40 up to 60
  backup-hanoi device-list.txt 40 60
+
+ # if you have 5 devices in the list
+ # create a plan for initilisation and overwriting
+ # for one year of daily backups
+ backup-hanoi device-list.txt -4 360
 
