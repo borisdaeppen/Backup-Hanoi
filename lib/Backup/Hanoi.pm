@@ -4,15 +4,17 @@ package Backup::Hanoi;
 use strict;
 use warnings;
 
+use v5.8.9;
+
 sub new {
     my $class   = shift;
-    my $devices = shift // [];
-
-    die "You need at least three devices, for this to work.\n"
-        if ($devices < 3);
+    my $devices = shift;
+    $devices = [] unless ($devices); # // operator needs v5.10
 
     # the number of devices predicts the size of the cycles
     my $device_count = scalar @{$devices};
+
+    die "three devices needed.\n" if ($device_count < 3);
 
     # half a hanoi cycle is just what we need for backup
     my $hanoi_cycles_half = (2**$device_count) / 2;
