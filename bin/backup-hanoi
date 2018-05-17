@@ -31,6 +31,10 @@ my $help = <<'END_MESSAGE';
 
     # create a device-list for the backups 40 up to 60
     backup-hanoi device-list.txt 40 60
+
+    # first initialise all backups (fifo), then replace 40 times (hanoi)
+    backup-hanoi device-list.txt init 40
+
 END_MESSAGE
 unless (@ARGV) {
     say $help;
@@ -93,3 +97,5 @@ You need to list your devices in a text file, separated by newline.
  # for one year of daily backups
  backup-hanoi device-list.txt -4 360
 
+ # same, but easier
+ backup-hanoi device-list.txt init 360
