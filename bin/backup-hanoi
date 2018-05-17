@@ -7,9 +7,13 @@ use warnings;
 # PODNAME: backup-hanoi
 # ABSTRACT: predict on which device to put next backup
 
-use feature 'say';
-                                                               
-use Backup::Hanoi;  
+use v5.6.0;
+use Backup::Hanoi;
+
+# we fake say, to support older perl
+sub say {
+    print "$_[0]\n";
+}
 
 my $help = <<'END_MESSAGE';
 

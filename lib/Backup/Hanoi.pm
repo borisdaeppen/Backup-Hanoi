@@ -4,7 +4,7 @@ package Backup::Hanoi;
 use strict;
 use warnings;
 
-use v5.8.9;
+use v5.6.0;
 
 sub new {
     my $class   = shift;
@@ -31,7 +31,9 @@ sub new {
 sub get_device_for_cycle {
 
     my $self  = shift;
-    my $cycle = shift // 0;
+    my $cycle = shift;
+
+    $cycle = 0 unless ($cycle); # // operator needs v5.10
 
     # treat negative numbers as normal FIFO
     # e.g. index -1 gives the second last element
