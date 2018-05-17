@@ -50,6 +50,9 @@ my $backup = Backup::Hanoi->new(\@devices);
 
 if (defined $cycle_top and ($cycle_top or $cycle_top == 0)) {
 
+    # start with negative number for FIFO
+    $cycle = 1 - (scalar @devices) if ($cycle eq 'init');
+
 	for ($cycle .. $cycle_top) {
 		say $backup->get_device_for_cycle($_);
 	}
