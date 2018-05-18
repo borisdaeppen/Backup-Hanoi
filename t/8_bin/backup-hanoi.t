@@ -1,4 +1,4 @@
-use Test::Script tests => 11;
+use Test::Script 1.10 tests => 11;
 
 script_compiles('bin/backup-hanoi');
 
