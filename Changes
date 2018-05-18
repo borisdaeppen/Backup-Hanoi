@@ -2,6 +2,10 @@ Revision history for Backup-Hanoi
  
 {{$NEXT}}
 
+0.005     2018-05-18 07:12:44+02:00 Europe/Zurich
+ - testing: use Test::Script 1.10 or higher
+ - testing: change order in tests
+
 0.004     2018-05-17 20:40:16+02:00 Europe/Zurich
  - code is backwards compatible to perl v5.6.0 (hopefully)
  - you can now use 'init' when calling the script
