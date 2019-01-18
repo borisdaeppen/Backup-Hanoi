@@ -103,7 +103,7 @@ Use it with care!
      print "\n";
  }
  
- # enhanced compination of FIFO for initialisation
+ # enhanced compination with FIFO for initialisation
  # and Hanoi algorithm for overwriting
  for (-3 .. 99) {
      print $backup->get_device_for_cycle($_);

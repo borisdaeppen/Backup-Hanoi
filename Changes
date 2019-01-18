@@ -1,6 +1,7 @@
 Revision history for Backup-Hanoi
  
 {{$NEXT}}
+ - fix spelling and typos in documentation
 
 0.005     2018-05-18 07:12:44+02:00 Europe/Zurich
  - testing: use Test::Script 1.10 or higher
